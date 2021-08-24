@@ -14,6 +14,7 @@ class ViewController: UIViewController {
   @IBOutlet weak var textField: UITextField!
   @IBOutlet weak var label: UILabel!
   @IBOutlet weak var button: UIButton!
+  @IBOutlet weak var showTableViewButton: UIButton!
   
   private var viewModel: ViewModel!
   private let disposeBag = DisposeBag()
@@ -21,7 +22,18 @@ class ViewController: UIViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    actions()
     bind()
+  }
+  
+  private func actions() {
+    showTableViewButton.rx.tap
+      .subscribe(onNext: { [weak self] in
+        let vc = DatasourceViewController()
+        vc.modalPresentationStyle = .fullScreen
+        self?.present(vc, animated: true, completion: nil)
+      })
+      .disposed(by: disposeBag)
   }
 
   private func bind() {

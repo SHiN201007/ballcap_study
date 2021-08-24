@@ -13,7 +13,7 @@ class Model {
   
   // save
   func save(failure: @escaping() -> Void, succsess: @escaping() -> Void) {
-    let document: Document<Test> = Document()
+    let document: Document<Room.room> = Document()
     document.save(completion: { error in
       if let _error = error {
         print(_error.localizedDescription)
@@ -25,10 +25,10 @@ class Model {
   
   // update
   func update(failure: @escaping() -> Void, succsess: @escaping() -> Void) {
-    let data = "sample text"
-    let test: Document<Test> = Document(id: "tZgHMSM9HLAK5eEVl7SH")
-    test.data?.text = data
-    test.update(completion: { error in
+    let data = "room name"
+    let document: Document<Room.room> = Document(id: "sw2Dgw0yO4WDd1yrGWF6")
+    document.data?.name = data
+    document.update(completion: { error in
       if let _error = error {
         print(_error.localizedDescription)
         failure()
@@ -37,15 +37,40 @@ class Model {
     })
   }
   
+  // add
+  func add(text: String, failure: @escaping() -> Void, succsess: @escaping() -> Void) {
+    
+    let room = Room()
+    let batch = Batch()
+    
+    let document: Document<Message.message> = Document()
+    document.data?.text = "test"    
+    batch.save(document, to: room.collection(path: .message))
+    batch.commit({ error in
+      if let _error = error {
+        print("error")
+        print(_error.localizedDescription)
+        failure()
+      }
+      print("success")
+      succsess()
+    })
+  }
+  
   // get data
   func getData(failure: @escaping() -> Void, succsess: @escaping(String) -> Void) {
-    let test: Document<Test> = Document(id: "tZgHMSM9HLAK5eEVl7SH")
-    _ = test.get { (document, error) in
+    let room: Document<Room.room> = Document(id: "sw2Dgw0yO4WDd1yrGWF6")
+    _ = room.get { (document, error) in
       if let _error = error {
         print(_error.localizedDescription)
         failure()
       }
-      succsess(document?.data?.text ?? "nil")
+      succsess(document?.data?.name ?? "nil")
     }
+  }
+  
+  // get DataSource
+  func getDataSource() {
+    
   }
 }

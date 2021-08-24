@@ -40,14 +40,20 @@
                                     <color key="titleColor" white="0.33333333329999998" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
                                 </state>
                             </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="system" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="zKW-Xh-TGw">
+                                <rect key="frame" x="158" y="515" width="98" height="30"/>
+                                <state key="normal" title="tableView表示"/>
+                            </button>
                         </subviews>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                         <color key="backgroundColor" systemColor="systemBackgroundColor"/>
                         <constraints>
                             <constraint firstItem="5nl-zL-IJg" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="8kR-0j-NKi"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="Dlb-GE-kA9" secondAttribute="trailing" constant="100" id="9ep-mb-isR"/>
+                            <constraint firstItem="zKW-Xh-TGw" firstAttribute="centerX" secondItem="8bC-Xf-vdC" secondAttribute="centerX" id="Kmj-x2-UKI"/>
                             <constraint firstItem="Dlb-GE-kA9" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="100" id="NH4-tD-9ao"/>
                             <constraint firstItem="Dlb-GE-kA9" firstAttribute="top" secondItem="5nl-zL-IJg" secondAttribute="bottom" constant="100" id="Xsh-MT-7Oo"/>
+                            <constraint firstItem="zKW-Xh-TGw" firstAttribute="top" secondItem="Dlb-GE-kA9" secondAttribute="bottom" constant="50" id="Xy4-D5-TDr"/>
                             <constraint firstItem="6Tk-OE-BBY" firstAttribute="trailing" secondItem="A0E-Dd-OFg" secondAttribute="trailing" constant="50" id="kVp-cM-tpO"/>
                             <constraint firstItem="5nl-zL-IJg" firstAttribute="top" secondItem="A0E-Dd-OFg" secondAttribute="bottom" constant="100" id="qn4-ok-GyZ"/>
                             <constraint firstItem="A0E-Dd-OFg" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" constant="50" id="voX-6A-AyS"/>
@@ -57,6 +63,7 @@
                     <connections>
                         <outlet property="button" destination="Dlb-GE-kA9" id="pft-KY-7wp"/>
                         <outlet property="label" destination="5nl-zL-IJg" id="Ye5-3x-O0f"/>
+                        <outlet property="showTableViewButton" destination="zKW-Xh-TGw" id="TgT-Yj-Xpl"/>
                         <outlet property="textField" destination="A0E-Dd-OFg" id="Tpi-6N-Lf9"/>
                     </connections>
                 </viewController>

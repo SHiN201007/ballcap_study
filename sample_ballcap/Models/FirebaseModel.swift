@@ -9,7 +9,6 @@ import Foundation
 import Firebase
 import Ballcap
 
-
 //MARK: -- Room
 class Room: Object, DataRepresentable & HierarchicalStructurable {
   var data: room?

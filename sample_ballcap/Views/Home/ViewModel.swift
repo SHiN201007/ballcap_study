@@ -35,6 +35,8 @@ class ViewModel {
     _output = ViewModel.Output.init(getText: getText)
     
     // init get
+    update()
+    getData()
     getDataSource()
     // bind
     bind()

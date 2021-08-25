@@ -27,7 +27,7 @@ class ViewModel {
   private let model = Model()
   private let disposeBag = DisposeBag()
   
-  private let updateText = PublishSubject<String>()
+  var text: String = ""
   private let getText = PublishSubject<String>()
   
   init(trigger: ViewModel.Input) {
@@ -46,14 +46,20 @@ class ViewModel {
     // textField
     _input.textField
       .subscribe(onNext: { [weak self] text in
-        self?.updateText(text)
+        self?.text = text
       })
       .disposed(by: disposeBag)
     
     // button
     _input.button
       .subscribe(onNext: { [weak self] in
-        self?.add()
+        if let _text = self?.text {
+          if !_text.isEmpty {
+            self?.add(_text)
+          }else {
+            KRProgressHUD.showError()
+          }
+        }
       })
       .disposed(by: disposeBag)
   }
@@ -79,9 +85,9 @@ class ViewModel {
   }
   
   // add
-  private func add() {
+  private func add(_ text: String) {
     KRProgressHUD.show()
-    model.add(text: "こんにちは", failure: {
+    model.add(text: text, failure: {
       KRProgressHUD.showError()
     }, succsess: {
       KRProgressHUD.dismiss()
@@ -101,12 +107,6 @@ class ViewModel {
   
   private func getDataSource() {
     model.getDataSource()
-  }
-  
-  
-  //MARK: -- Update Value
-  private func updateText(_ text: String) {
-    updateText.onNext(text)
   }
   
   // MARK: -- OUTPUT

@@ -1,0 +1,10 @@
+$(SRCROOT)/Carthage/Build/iOS/RxCocoa.framework
+$(SRCROOT)/Carthage/Build/iOS/RxRelay.framework
+$(SRCROOT)/Carthage/Build/iOS/RxSwift.framework
+$(SRCROOT)/Carthage/Build/iOS/SwiftDate.framework
+$(SRCROOT)/Carthage/Build/iOS/RxSwiftExt.framework
+$(SRCROOT)/Carthage/Build/iOS/RxDataSources.framework
+$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManager.framework
+$(SRCROOT)/Carthage/Build/iOS/IQKeyboardManagerSwift.framework
+$(SRCROOT)/Carthage/Build/iOS/FFPopup.framework
+$(SRCROOT)/Carthage/Build/iOS/KRProgressHUD.framework

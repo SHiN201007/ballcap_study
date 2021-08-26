@@ -1,0 +1,139 @@
+name: sample_ballcap
+options:
+  deploymentTarget:
+    iOS: 13.0
+  postGenCommand: pod install
+configs:
+  DevelopDebug: debug
+  Develop: release
+  ReleaseDebug: debug
+  Release: release
+settings:
+  configs:
+    DevelopDebug:
+      OTHER_SWIFT_FLAGS:
+        - -D
+        - DEVELOP
+    Develop:
+      OTHER_SWIFT_FLAGS:
+        - -D
+        - DEVELOP
+      SWIFT_OPTIMIZATION_LEVEL:
+        - -Onone
+      GCC_OPTIMIZATION_LEVEL:
+        - 0
+    ReleaseDebug:
+      OTHER_SWIFT_FLAGS:
+        - -D
+        - RELEASE
+    Release:
+      OTHER_SWIFT_FLAGS:
+        - -D
+        - RELEASE
+schemes:
+  sample_ballcap-Dev:
+    build:
+      targets:
+        sample_ballcap: [analyze, run, archive]
+    run:
+      config: DevelopDebug
+    test:
+      config: DevelopDebug
+      gatherCoverageData: true
+      coverageTargets:
+        - sample_ballcap
+      targets: []
+      environmentVariables:
+        - variable: isUnitTest
+          value: "true"
+          isEnabled: false
+    profile:
+      config: Develop
+    analyze:
+      config: Develop
+    archive:
+      config: Develop
+  sample_ballcap:
+    build:
+      targets:
+        sample_ballcap: [analyze, run, archive]
+    run:
+      config: ReleaseDebug
+    test:
+      config: ReleaseDebug
+      gatherCoverageData: true
+      coverageTargets:
+        - sample_ballcap
+      targets: []
+      environmentVariables:
+        - variable: isUnitTest
+          value: "true"
+          isEnabled: false
+    profile:
+      config: Release
+    analyze:
+      config: Release
+    archive:
+      config: Release
+targets:
+  sample_ballcap:
+    type: application
+    platform: iOS
+    sources:
+      - path: sample_ballcap
+        excludes:
+          - "**/.gitkeep"
+          - README.md
+    dependencies:
+      - carthage: RxSwift
+      - carthage: RxSwiftExt
+      - carthage: RxDataSources
+      - carthage: RxCocoa
+      - carthage: RxRelay
+      - carthage: IQKeyboardManager
+      - carthage: IQKeyboardManagerSwift
+      - carthage: SwiftDate
+      - carthage: FFPopup
+      - carthage: KRProgressHUD
+      - carthage: Differentiator
+      - carthage: KRActivityIndicatorView
+    postCompileScripts:
+      - name: Carthage Copy framework for Interface Builder
+        script: |
+          if [ ${TARGET_INTERFACE_BUILDER} = "1" ]; then
+          carthage copy-frameworks
+          fi
+        inputFileLists:
+          - $(SRCROOT)/carthageFramework.xcfilelist
+    settings:
+      base:
+        TARGETED_DEVICE_FAMILY: 2
+        MARKETING_VERSION: 1.0.0
+        CURRENT_PROJECT_VERSION: 1.0.0
+      configs:
+        DevelopDebug:
+          PRODUCT_BUNDLE_IDENTIFIER: jp.softbank.i.m-107-sin.sample_ballcap.dev
+        Develop:
+          PRODUCT_BUNDLE_IDENTIFIER: jp.softbank.i.m-107-sin.sample_ballcap.dev
+        ReleaseDebug:
+          PRODUCT_BUNDLE_IDENTIFIER: jp.softbank.i.m-107-sin.sample_ballcap
+        Release:
+          PRODUCT_BUNDLE_IDENTIFIER: jp.softbank.i.m-107-sin.sample_ballcap
+  sample_ballcapTests:
+    type: bundle.unit-test
+    platform: iOS
+    sources:
+      - path: sample_ballcapTests
+        createIntermediateGroups: true
+    dependencies:
+      - target: sample_ballcap
+    settings:
+      LD_RUNPATH_SEARCH_PATHS: "$(inherited) @executable_path/Frameworks @loader_path/Frameworks $(FRAMEWORK_SEARCH_PATHS)"
+  sample_ballcapUITests:
+    type: bundle.ui-testing
+    platform: iOS
+    sources:
+      - path: sample_ballcapUITests
+        createIntermediateGroups: true
+    dependencies:
+      - target: sample_ballcap

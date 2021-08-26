@@ -1,8 +1,0 @@
-app_identifier("jp.softbank.i.m-107-sin.sample-ballcap") # The bundle identifier of your app
-apple_id("sin-107-m@i.softbank.jp") # Your Apple email address
-
-itc_team_id("121460311") # App Store Connect Team ID
-team_id("657Z774V99") # Developer Portal Team ID
-
-# For more information about the Appfile, see:
-#     https://docs.fastlane.tools/advanced/#appfile

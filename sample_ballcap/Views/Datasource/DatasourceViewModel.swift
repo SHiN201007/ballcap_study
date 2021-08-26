@@ -10,6 +10,10 @@ import RxSwift
 import RxCocoa
 import KRProgressHUD
 
+struct Data {
+  var message: String
+}
+
 class DatasourceViewModel {
   
   struct Input {
@@ -26,9 +30,14 @@ class DatasourceViewModel {
   private let model = DatasourceModel()
   private let disposeBag = DisposeBag()
   
+  private var itemsRelay = BehaviorSubject<[Data]>(value: [])
+  
   init(trigger: DatasourceViewModel.Input) {
     _input = trigger
     _output = DatasourceViewModel.Output.init()
+    
+    // init get
+    getDataSource()
     
     // bind
     bind()
@@ -36,6 +45,13 @@ class DatasourceViewModel {
   
   private func bind() {
     
+  }
+  
+  // get datasource
+  private func getDataSource() {
+    model.getDataSource { [weak self] items in
+      self?.itemsRelay.onNext(items)
+    }
   }
   
   

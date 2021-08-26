@@ -1,6 +1,0 @@
-framework module Pods_sample_ballcap_sample_ballcapUITests {
-  umbrella header "Pods-sample_ballcap-sample_ballcapUITests-umbrella.h"
-
-  export *
-  module * { export * }
-}

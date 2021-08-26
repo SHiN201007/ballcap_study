@@ -1,0 +1,17 @@
+github "Alamofire/Alamofire"
+github "Alamofire/AlamofireNetworkActivityIndicator" ~> 3.0.0-beta.3
+
+# Rx
+github "ReactiveX/RxSwift" ~> 6.2.0
+github "RxSwiftCommunity/RxDataSources" ~> 5.0.0
+github "RxSwiftCommunity/RxSwiftExt" ~> 6.0.0
+github "RxSwiftCommunity/RxOptional" ~> 5.0.3
+
+# Date
+github "malcommac/SwiftDate" ~> 6.1.0
+
+github "JonyFang/FFPopup"
+github "Krimpedance/KRProgressHUD"
+
+# keyBoard suport
+github "hackiftekhar/IQKeyboardManager"

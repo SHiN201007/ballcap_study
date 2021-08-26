@@ -1,0 +1,11 @@
+{
+  "commitish" : "3.1.0",
+  "iOS" : [
+    {
+      "hash" : "51db6c193ffe3137b1dfba7a71a23b698cdbcf51f4e642b5e515a2c03a23eb81",
+      "name" : "AlamofireNetworkActivityIndicator",
+      "linking" : "dynamic",
+      "swiftToolchainVersion" : "5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)"
+    }
+  ]
+}

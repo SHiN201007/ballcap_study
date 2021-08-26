@@ -1,0 +1,15 @@
+{
+  "commitish" : "1.1.5",
+  "iOS" : [
+    {
+      "name" : "FFPopup",
+      "hash" : "5245134c1e7e9858d99fe5342402543cc8e6bd6515a6edf87557228be033f691",
+      "linking" : "dynamic"
+    },
+    {
+      "name" : "FFPopup_Static",
+      "hash" : "c4bb37cac422c1b0e2e553b074cf02b37afd08e16c1bccccb0eb3fedfce897af",
+      "linking" : "static"
+    }
+  ]
+}

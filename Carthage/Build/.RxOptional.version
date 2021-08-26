@@ -1,0 +1,11 @@
+{
+  "commitish" : "v5.0.3",
+  "iOS" : [
+    {
+      "hash" : "b8e6cecaf685e71e64aeff8a0bdca54f7707d2a3c0feb45c58728935ad610cea",
+      "name" : "RxOptional",
+      "linking" : "dynamic",
+      "swiftToolchainVersion" : "5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)"
+    }
+  ]
+}

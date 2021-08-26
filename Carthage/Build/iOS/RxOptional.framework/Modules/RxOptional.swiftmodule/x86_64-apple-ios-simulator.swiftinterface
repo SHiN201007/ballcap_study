@@ -1,0 +1,62 @@
+// swift-interface-format-version: 1.0
+// swift-compiler-version: Apple Swift version 5.4 (swiftlang-1205.0.26.9 clang-1205.0.19.55)
+// swift-module-flags: -target x86_64-apple-ios10.0-simulator -enable-objc-interop -enable-library-evolution -swift-version 5 -enforce-exclusivity=checked -O -module-name RxOptional
+import Foundation
+import RxCocoa
+@_exported import RxOptional
+import RxSwift
+import Swift
+extension ObservableType where Self.Element : RxOptional.Occupiable {
+  public func filterEmpty() -> RxSwift.Observable<Self.Element>
+  public func catchOnEmpty(_ handler: @escaping () throws -> RxSwift.Observable<Self.Element>) -> RxSwift.Observable<Self.Element>
+  public func errorOnEmpty(_ error: Swift.Error = RxOptionalError.emptyOccupiable(Element.self)) -> RxSwift.Observable<Self.Element>
+}
+extension ObservableType where Self.Element : RxOptional.OptionalType {
+  public func filterNil() -> RxSwift.Observable<Self.Element.Wrapped>
+  public func filterNilKeepOptional() -> RxSwift.Observable<Self.Element>
+  public func errorOnNil(_ error: Swift.Error = RxOptionalError.foundNilWhileUnwrappingOptional(Element.self)) -> RxSwift.Observable<Self.Element.Wrapped>
+  public func replaceNilWith(_ valueOnNil: Self.Element.Wrapped) -> RxSwift.Observable<Self.Element.Wrapped>
+  public func catchOnNil(_ handler: @escaping () throws -> RxSwift.Observable<Self.Element.Wrapped>) -> RxSwift.Observable<Self.Element.Wrapped>
+}
+public protocol Occupiable {
+  var isEmpty: Swift.Bool { get }
+  var isNotEmpty: Swift.Bool { get }
+}
+extension Occupiable {
+  public var isNotEmpty: Swift.Bool {
+    get
+  }
+}
+extension String : RxOptional.Occupiable {
+}
+extension Array : RxOptional.Occupiable {
+}
+extension Dictionary : RxOptional.Occupiable {
+}
+extension Set : RxOptional.Occupiable {
+}
+public protocol OptionalType {
+  associatedtype Wrapped
+  var value: Self.Wrapped? { get }
+}
+extension Optional : RxOptional.OptionalType {
+  public var value: Wrapped? {
+    get
+  }
+}
+public enum RxOptionalError : Swift.Error, Swift.CustomStringConvertible {
+  case foundNilWhileUnwrappingOptional(Any.Type)
+  case emptyOccupiable(Any.Type)
+  public var description: Swift.String {
+    get
+  }
+}
+extension SharedSequenceConvertibleType where Self.Element : RxOptional.Occupiable {
+  public func filterEmpty() -> RxCocoa.SharedSequence<Self.SharingStrategy, Self.Element>
+  public func catchOnEmpty(_ handler: @escaping () -> RxCocoa.SharedSequence<Self.SharingStrategy, Self.Element>) -> RxCocoa.SharedSequence<Self.SharingStrategy, Self.Element>
+}
+extension SharedSequenceConvertibleType where Self.Element : RxOptional.OptionalType {
+  public func filterNil() -> RxCocoa.SharedSequence<Self.SharingStrategy, Self.Element.Wrapped>
+  public func replaceNilWith(_ valueOnNil: Self.Element.Wrapped) -> RxCocoa.SharedSequence<Self.SharingStrategy, Self.Element.Wrapped>
+  public func catchOnNil(_ handler: @escaping () -> RxCocoa.SharedSequence<Self.SharingStrategy, Self.Element.Wrapped>) -> RxCocoa.SharedSequence<Self.SharingStrategy, Self.Element.Wrapped>
+}

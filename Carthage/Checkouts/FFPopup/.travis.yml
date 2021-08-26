@@ -1,0 +1,47 @@
+language: objective-c
+osx_image: xcode11.4
+
+xcode_workspace: FFPopup.xcworkspace
+podfile: Demo/Podfile
+
+before_install:
+  - env
+  - locale
+  - bundle install
+  - gem install cocoapods --no-document --quiet
+  - gem install xcpretty --no-document --quiet
+  - bundler exec pod --version
+  - bundler exec pod setup --silent > /dev/null
+  - bundler exec pod repo update --silent
+  - xcpretty --version
+  - xcodebuild -version
+  - xcodebuild -showsdks
+
+script:
+  - set -o pipefail
+
+  - echo Check if the library described by the podspec can be built
+  - pod lib lint --allow-warnings
+
+  - echo Build as static library
+  - xcodebuild build -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "FFPopup_Static" -sdk iphonesimulator PLATFORM_NAME=iphonesimulator -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
+
+  - echo Build as dynamic framework
+  - xcodebuild build -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "FFPopup" -sdk iphonesimulator PLATFORM_NAME=iphonesimulator -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
+
+  - echo Build the Demo apps
+  - pod install --project-directory=Demo
+  - xcodebuild build -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "FFPopup_Objc" -destination 'platform=iOS Simulator,name=iPhone 11 Pro' -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
+  - xcodebuild build -workspace "$TRAVIS_XCODE_WORKSPACE" -scheme "FFPopup_Swift" -destination 'platform=iOS Simulator,name=iPhone 11 Pro' -configuration Debug CODE_SIGNING_ALLOWED=NO | xcpretty -c
+
+  - echo Clean DerivedData
+  - rm -rf ~/Library/Developer/Xcode/DerivedData/
+  - mkdir DerivedData
+
+notifications:
+  email: false
+
+after_success:
+  - export PATH="/usr/local/opt/curl/bin:$PATH"
+  - curl --version
+  - bash <(curl -s https://codecov.io/bash) -D './DerivedData/iOS' -J '^FFPopup$' -c -X gcov -F ios

@@ -17,17 +17,6 @@ target 'sample_ballcap' do
   #
   pod 'Ballcap'
 
-  # Rx
-  pod 'RxSwift'
-  pod 'RxCocoa'
-  pod 'RxOptional'
-  pod 'RxDataSources'
-
-  # HUD
-  pod "KRProgressHUD"
-  # keyBoard suport
-  pod 'IQKeyboardManagerSwift'
-
 
   target 'sample_ballcapTests' do
     inherit! :search_paths

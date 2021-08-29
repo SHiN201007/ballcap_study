@@ -48,5 +48,3 @@ class ViewController: UIViewController {
   }
 
 }
-
-// test comment
